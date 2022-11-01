@@ -116,16 +116,18 @@ def fetch_audio_features(spotify_object, df_to_concat, uri=['spotify:track:6q6rs
 
 def mergeArrays(spotify_object, df_previous, n_repetitions, rem, counter=1):
     if counter >= n_repetitions+1:
-        df_no_features, size1 = fetch_saved_tracks(spotify_object, rem, counter * 50)
-        df_new_features = fetch_audio_features(spotify_object, df_no_features, df_no_features['id'].to_numpy())
-        df_new = pd.concat([df_previous, df_new_features])
-        
-        # df_new.to_csv("liked_tracks.csv", index=False)
+        if rem!=0:
+            df_no_features, size1 = fetch_saved_tracks(spotify_object, rem, counter * 50)
+            df_new_features = fetch_audio_features(spotify_object, df_no_features, df_no_features['id'].to_numpy())
+            df_new = pd.concat([df_previous, df_new_features])
+            
+            # df_new.to_csv("liked_tracks.csv", index=False)
 
 
-        print(f'   iter --- {counter} --- finished')
+            print(f'   iter --- {counter} --- finished')
 
-        return df_new
+            return df_new
+        return df_previous
 
     else:
         df_no_features, size1 = fetch_saved_tracks(spotify_object, 50, counter * 50)
