@@ -1,0 +1,126 @@
+body {
+    background-color: #0A0A0A;
+}
+.title, .subtitle{
+    color: white;
+}
+
+.date {
+    font-size: 18px;
+}
+
+
+
+
+.interval-title {
+
+}
+
+.box-demo {
+    /* height: 350px; */
+    margin-bottom: 55px;
+    margin-top: 35px;
+    /* background-color: rgb(134, 134, 134);
+
+
+    border-radius: 0; */
+}
+
+.interval-display {
+    background-color: rgb(26, 26, 26);
+    border-radius: 0em;
+    padding: 20px;
+
+}
+
+.column{
+    padding: 0;
+    height: 150px;
+}
+
+.interval-page {
+
+}
+
+.date-container .title{
+    padding-bottom: 3px;
+    font-weight: 900;
+    
+
+}
+
+
+.date-container .subtitle {
+
+    font-size: small;
+    font-weight: 600;
+}
+
+.date-container{
+    margin-bottom: 4px;
+    
+    width: 95%;
+}
+
+.interval-display .columns:nth-child(1){
+    margin: 0 1em;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.carousel-cell {
+    width: 100%;
+    /* full width */
+    margin-right: 10px;
+}
+
+.flickity-button {
+    background: #333;
+}
+
+.flickity-button:hover {
+    background: #F90;
+}
+
+.flickity-prev-next-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 5px;
+}
+
+/* icon color */
+.flickity-button-icon {
+    fill: white;
+}
+
+/* position outside */
+.flickity-prev-next-button.previous {
+    left: -40px;
+}
+
+.flickity-prev-next-button.next {
+    right: -40px;
+}
+
+/* #lineChart{
+    width: 10px;
+}
+
+
+@media(min-width: 100px) {
+    #chart_general {
+        height: 100vh;
+    }
+} */

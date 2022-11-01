@@ -1,0 +1,10 @@
+README.rst
+setup.cfg
+setup.py
+cydets/__init__.py
+cydets/algorithm.py
+cydets.egg-info/PKG-INFO
+cydets.egg-info/SOURCES.txt
+cydets.egg-info/dependency_links.txt
+cydets.egg-info/requires.txt
+cydets.egg-info/top_level.txt

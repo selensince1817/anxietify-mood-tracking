@@ -1,0 +1,102 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Analyzify</title>
+    <script src="https://kit.fontawesome.com/f759709dd9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  </head>
+  <body>
+  <section class="hero is-fullheight has-background-black">
+    <div class="hero-head">
+
+
+        <header class="navbar">
+
+            {% if logged_in==True %}
+            <div class="container">
+              <div class="navbar-brand">
+                    <a class="navbar-item">
+                    <!-- <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo"> -->
+                    </a>
+                    <span class="navbar-burger" data-target="navbarMenuHeroC">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    </span>
+              </div>
+              <div id="navbarMenuHeroC" class="navbar-menu">
+                <div class="navbar-end">
+
+                  <a class="navbar-item has-text-grey" href="/">
+                    Home
+                  </a>
+                  <span class="navbar-item has-text-white">
+                    <!-- <a class="button is-success is-inverted">
+                      <span class="icon">
+                        <i class="fab fa-github"></i>
+                      </span>
+                      <span>Download</span>
+                    </a> -->
+                    <a href="/sign_out">Sign out</a>
+                  </span>
+
+                </div>
+              </div>
+            </div>
+            {% endif %}
+          </header>
+
+
+    </div>
+
+
+
+    <div class="hero-body has-text-centered">
+        <div class="container">
+            <div class="block mb-6">
+                <div class="container px-6">
+                    <div class="title has-text-white is-spaced">
+                        Explore the mood changes throughout your <span class="has-text-success"> Spotify</span> history
+                    </div>
+                    <div class="subtitle mx-6">Powered by CyDETS <small> &#169</small></div>
+                </div>
+            </div>
+
+            <div class="block mx-6 pt-4">
+                <div class="container">
+                    {% if logged_in==False %}
+                    <button type="button" onclick="location.href='{{authorization_url}}'" class="button has-background-black has-text-white is-rounded is-outlined is-large">
+                        <span class="mr-1"><strong>Sign in </strong></span><span class="icon has-text-success"><i class="fa-brands fa-spotify fa-xl"></i></span>
+                    </button>
+
+                    {% elif logged_in==True %}
+                        <button type="button" onclick="location.href='/fetch'" class="button has-background-white has-text-black is-rounded is-large is-inverted is-outlined">
+                            <span class="mr-1"><strong>Go</strong></span>
+                        </button>
+
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+
+
+    <div class="hero-foot">
+
+    </div>
+  </section>
+
+  </body>
+</html>

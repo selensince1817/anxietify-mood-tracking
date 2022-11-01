@@ -1,0 +1,194 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Analyzify</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://kit.fontawesome.com/f759709dd9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+  </head>
+  {% autoescape off %}
+
+  <body class="has-background-black">
+
+    <section class="hero is-fullheight has-background-black">
+        <div class="hero-head">
+
+            <header class="navbar">
+                <div class="container">
+                  <div class="navbar-brand">
+                        <a class="navbar-item">
+                        <!-- <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo"> -->
+                        </a>
+                        <span class="navbar-burger" data-target="navbarMenuHeroC">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        </span>
+                  </div>
+                  <div id="navbarMenuHeroC" class="navbar-menu">
+                    <div class="navbar-end">
+    
+                      <a class="navbar-item has-text-grey" href="/">
+                        Home
+                      </a>
+                      <span class="navbar-item has-text-white">
+                        <!-- <a class="button is-success is-inverted">
+                          <span class="icon">
+                            <i class="fab fa-github"></i>
+                          </span>
+                          <span>Download</span>
+                        </a> -->
+                        <a href="/sign_out">Sign out</a>
+                      </span>
+    
+                    </div>
+                  </div>
+                </div>
+              </header>
+        </div>
+    
+    
+    
+        <div class="hero-body has-text-centered">
+            
+            <div class="container is-fluid">
+                <div class="container">
+                    <div class="title is-3 has-text-white">Mood Time Series</div>
+                    <div class="subtitle">Graph shows the 'happiness' of your tracks in 'Saved' throughout the whole time period</div>
+                </div>
+
+                
+                <div class="container pt-6 ">
+                    <canvas id="lineChart" width="700px" height="500px" class="1"></canvas>
+                </div>
+
+                <div class="container has-text-left pt-3">
+                    <div class="content is-small ">
+                        <h2 class="has-text-white">A little clarification</h2>
+                        <p class="m-0">Each track in Spotify has various parameters determined by holy algorithms.</p>
+                        <p class="m-0">Simply saying, each time an artist uploads a track to Spotify, a Machine Learning is used to try and quantify the track to enable better recommendation system as well as those cool features like Spotify Wrapped, etc.</p>
+                        <p>Those parameters can include:</p>
+                        <ul>
+                          <li>How danceable the track is</li>
+                          <li>How melodic the track is.</li>
+                          <li>The happiness level of the track.</li>
+                          <li>And so on...</li>
+                        </ul>
+                        <p>I suggest you to read <a href="https://www.music-tomorrow.com/blog/how-spotify-recommendation-system-works-a-complete-guide-2022">this </a> article if you are interested</p>
+                        <p class="m-0">Next page shows the cycles (periods) detected in your Spotify 'Saved' playlist.</p>
+                      </div>
+                </div>
+
+                    
+                <div class="container pt-4 is-flex is-justify-content-end">
+                    <nav class="pagination is-rounded" role="navigation" aria-label="pagination">
+                        <a href="/display_periods" class="pagination-next has-text-white">Next page</a>
+                    </nav>
+                </div>
+                
+    
+            </div>
+
+
+    
+        </div>
+
+    
+    
+    
+        <div class="hero-foot">
+
+    
+        </div>
+      </section>
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <script>
+          var config = {
+            type: "line",
+            data: {
+              labels: {{ labels }},
+              datasets: [
+                {
+                  label: "data",
+                  data: {{ values }},
+                  backgroundColor: "rgba(30, 215, 96, 0.2)",
+                  borderColor: "rgb(30, 215, 96)",
+                  borderWidth: 3,
+                  lineTension: 0.1,
+                  pointBorderWidth: 0.1,
+                  pointBorderColor: 'rgba(0, 0, 0, 0)',
+                  pointBackgroundColor: 'rgba(0, 0, 0, 0)'
+
+                }
+              ]
+            },
+            
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            
+            elements: {
+              point: {
+                radius: 6
+
+              }
+            },
+              scales: {
+                yAxes: [
+                  {
+                    gridLines: {
+                      display: false,
+                      drawBorder: false,
+                    },
+                  },
+                ],
+                xAxes: [
+                  {
+                    gridLines: {
+                      display: false,
+                      drawBorder: false,
+                    },
+                  },
+                ],
+              },
+
+          }
+                    };
+          var ctx = document.getElementById("lineChart").getContext("2d");
+          var lineChart = new Chart(ctx, config);
+        </script>
+  </body>
+  {% endautoescape %}
+
+</html>
+
+
+
+
+
