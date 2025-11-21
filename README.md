@@ -2,7 +2,7 @@
 
 Anxietify visualises the emotional arc of your Spotify saved tracks. After authenticating with Spotify, the app fetches your library, derives rolling valence scores, detects mood “cycles”, and renders them via a Flask + Bulma front‑end.
 
-## Important: Spotify API Restrictions (November 2024)
+## ⚠ Important: Spotify API Restrictions (November 2024)
 
 **Effective November 27, 2024, Spotify has restricted access to the `audio-features` endpoint for new applications and those in development mode.**
 
