@@ -2,6 +2,18 @@
 
 Anxietify visualises the emotional arc of your Spotify saved tracks. After authenticating with Spotify, the app fetches your library, derives rolling valence scores, detects mood “cycles”, and renders them via a Flask + Bulma front‑end.
 
+## Important: Spotify API Restrictions (November 2024)
+
+**Effective November 27, 2024, Spotify has restricted access to the `audio-features` endpoint for new applications and those in development mode.**
+
+This application relies on `audio_features` (specifically `valence`) to calculate mood. If you are running this with a new Client ID or an app in "Development Mode," Spotify will return **403 Forbidden** errors during the fetch step.
+
+**Workarounds:**
+1. **Existing Extension:** If you have an older Client ID with extended access approval, use that credential.
+2. **Request Extension:** Check your Spotify Developer Dashboard to see if you are eligible to request an extension for deprecated endpoints.
+3. **Pivot:** Without `audio-features`, the mood analysis pipeline cannot function as originally designed.
+
+
 ## Features
 
 - **Spotify OAuth flow** backed by server-side sessions and cache files per visitor.
@@ -70,17 +82,6 @@ Anxietify visualises the emotional arc of your Spotify saved tracks. After authe
 - Gunicorn is configured in `Procfile`: `web: gunicorn app:app`.
 - Session data and Spotify cache files are stored inside `.flask_session/` and `.spotify_caches/` (ignored in git). Ensure the filesystem is writable (e.g., use ephemeral disk on Heroku or mount persistent storage).
 - The new service layer is pure Python/pandas, so it can be unit tested offline using stored Spotify responses.
-
-## Important: Spotify API Restrictions (November 2024)
-
-**Effective November 27, 2024, Spotify has restricted access to the `audio-features` endpoint for new applications and those in development mode.**
-
-This application relies on `audio_features` (specifically `valence`) to calculate mood. If you are running this with a new Client ID or an app in "Development Mode," Spotify will return **403 Forbidden** errors during the fetch step.
-
-**Workarounds:**
-1. **Existing Extension:** If you have an older Client ID with extended access approval, use that credential.
-2. **Request Extension:** Check your Spotify Developer Dashboard to see if you are eligible to request an extension for deprecated endpoints.
-3. **Pivot:** Without `audio-features`, the mood analysis pipeline cannot function as originally designed.
 
 ## Troubleshooting
 
