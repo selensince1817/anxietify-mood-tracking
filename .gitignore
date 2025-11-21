@@ -1,3 +1,28 @@
+__pycache__/
+*.py[cod]
+*.sqlite3
+.DS_Store
+.env
+.flask_session/
+.spotify_caches/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+dist/
+build/
+*.egg-info/
+venv/
+env/
+.venv/
+
+# IDE
+.idea/
+.vscode/
+
+# Node/bundler artifacts
+static/node_modules/
+
 credz
 .flask_session
 .spotify_caches

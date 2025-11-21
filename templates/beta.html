@@ -1,83 +1,15 @@
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Analyzify</title>
-    <script src="https://kit.fontawesome.com/f759709dd9.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-  </head>
-  <body>
-  <section class="hero is-fullheight has-background-black">
-    <div class="hero-head">
+{% extends "base.html" %}
 
+{% block title %}Anxietify | Access Request{% endblock %}
 
-        <header class="navbar">
-
-            {% if logged_in==True %}
-            <div class="container">
-              <div class="navbar-brand">
-                    <a class="navbar-item">
-                    <!-- <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo"> -->
-                    </a>
-                    <span class="navbar-burger" data-target="navbarMenuHeroC">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    </span>
-              </div>
-              <div id="navbarMenuHeroC" class="navbar-menu">
-                <div class="navbar-end">
-
-                  <a class="navbar-item has-text-grey" href="/">
-                    Home
-                  </a>
-                  <span class="navbar-item has-text-white">
-                    <!-- <a class="button is-success is-inverted">
-                      <span class="icon">
-                        <i class="fab fa-github"></i>
-                      </span>
-                      <span>Download</span>
-                    </a> -->
-                    <a href="/sign_out">Sign out</a>
-                  </span>
-
-                </div>
-              </div>
-            </div>
-            {% endif %}
-          </header>
-
-
-    </div>
-
-
-
-    <div class="hero-body has-text-centered">
-
-
-        <div class="container">
-            <h1 class="title is-2 has-text-white">Sorry...</h1>
-            <p class="subtitle has-text-white mt-2">Looks like you are not registered for the development testing. </p>
-            <p class="subtitle has-text-white mt-3">
-                 Please send an email to <b>selen.since.1817@gmail.com</b> including your name and email address that is linked to your Spotify Account.
-            </p>
-        </div>
-
-
-    </div>
-
-
-
-
-
-
-
-
-
-    <div class="hero-foot">
-
-    </div>
-  </section>
-
-  </body>
-</html>
+{% block body %}
+<div class="has-text-centered">
+  <h1 class="title is-2 has-text-white">Sorry...</h1>
+  <p class="subtitle has-text-white mt-2">
+    Looks like you are not registered for the development testing.
+  </p>
+  <p class="subtitle has-text-white mt-3">
+    Please email <strong>selen.since.1817@gmail.com</strong> with your name and Spotify account email.
+  </p>
+</div>
+{% endblock %}

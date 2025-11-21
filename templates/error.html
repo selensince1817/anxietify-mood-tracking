@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}{{ title or "Anxietify | Error" }}{% endblock %}
+
+{% block body %}
+<div class="notification is-danger has-text-centered">
+  <h1 class="title is-4 has-text-white">{{ title or "Something went wrong" }}</h1>
+  <p class="has-text-white">{{ message or "An unexpected error occurred." }}</p>
+</div>
+<div class="has-text-centered mt-5">
+  <a class="button is-light" href="/">Return home</a>
+  <a class="button is-link is-light" href="/fetch">Try again</a>
+</div>
+{% endblock %}

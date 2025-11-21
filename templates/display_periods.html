@@ -1,241 +1,100 @@
-<html>
+{% extends "base.html" %}
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hello Bulma!</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
-  <script src="https://kit.fontawesome.com/f759709dd9.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+{% block title %}Anxietify | Mood Cycles{% endblock %}
 
-  <link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css">
+{% block extra_head %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" />
+{% endblock %}
 
-
-
-  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-
-</head>
-{% autoescape off %}
-
-<body class="">
-
-  <section class="hero is-fullheight">
-    <div class="hero-head">
-
-      <header class="navbar">
-        <div class="container">
-          <div class="navbar-brand">
-            <a class="navbar-item">
-              <!-- <img src="https://bulma.io/images/bulma-type-white.png" alt="Logo"> -->
-            </a>
-            <span class="navbar-burger" data-target="navbarMenuHeroC">
-              <span></span>
-              <span></span>
-              <span></span>
-            </span>
-          </div>
-          <div id="navbarMenuHeroC" class="navbar-menu">
-            <div class="navbar-end">
-
-              <a class="navbar-item has-text-grey" href="/">
-                Home
-              </a>
-              <span class="navbar-item">
-                <!-- <a class="button is-success is-inverted">
-                          <span class="icon">
-                            <i class="fab fa-github"></i>
-                          </span>
-                          <span>Download</span>
-                        </a> -->
-                <a href="/sign_out">Sign out</a>
-              </span>
-
-            </div>
-          </div>
-        </div>
-      </header>
+{% block body %}
+<div class="main-carousel">
+  {% for period in periods %}
+  <div class="box carousel-cell interval-page has-background-black">
+    <div class="interval-title">
+      <div class="title is-2">Period #{{ period.number }}</div>
     </div>
 
+    <div class="box-demo">
+      <canvas id="{{ period.canvas_id }}" width="1440" height="700"></canvas>
+    </div>
 
-
-    <div class="hero-body has-text-centered ">
-
-      <div class="container  main-carousel ">
-        <!-- <div class="container mb-6">
-                    <div class="title is-2">Title 1</div>
-                    <div class="subtitle">subtitle 1 subtitle 1</div>
-                </div> -->
-
-        {% for i in periods_json.start_date.items() %}
-
-
-        <div class="box itemm-{{loop.index}} carousel-cell interval-page has-background-black">
-
-          <div class="container interval-title">
-            <div class="title is-2 ">Period #{{loop.index}}</div>
+    <div class="interval-display">
+      <div class="columns is-flex is-justify-content-space-between is-mobile">
+        <div class="column is-one-quarter">
+          <div class="container date-container">
+            <p class="title date start_date">{{ period.start_date }}</p>
           </div>
-
-          <div class="container is-fluid box-demo">
-            <canvas id="lineChart-{{loop.index}}" width="1440" height="700"></canvas>
-          </div>
-
-
-          <div class="container is-fluid interval-display">
-            
-            <div class="columns is-flex is-justify-content-space-between is-mobile">
-              <div class="column is-one-quarter">
-                <div class="container date-container">
-                  <p class="title date start_date">{{periods_json.start_date[(loop.index-1)|string]}}</p>
-                  <!-- <p class="subtitle">START</p> -->
-                </div>
-                <iframe style="border-radius:12px"
-                  src="https://open.spotify.com/embed/track/{{periods_json.song_start_uri[(loop.index-1)|string]}}?utm_source=generator"
-                  width="100%" height="100%" frameBorder="0" allowfullscreen=""
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="eager"></iframe>
-
-              </div>
-              <!--  -->
-
-              <!--  -->
-              <div class="column is-one-quarter ">
-                <div class="container date-container">
-                  <p class="title date end_date">{{periods_json.end_date[(loop.index-1)|string]}}</p>
-                  <!-- <p class="subtitle">END</p> -->
-                </div>
-
-                <iframe style="border-radius:12px"
-                  src="https://open.spotify.com/embed/track/{{periods_json.song_end_uri[(loop.index-1)|string]}}?utm_source=generator"
-                  width="100%" height="100%" frameBorder="0" allowfullscreen=""
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="eager">
-                </iframe>
-              </div>
-
-
-            </div>
-
-            <div class="columns is-flex is-justify-content-center is-mobile">
-
-
-              <div class="column is-one-quarter ">
-                <div class="container date-container">
-                  <p class="title date min_date">{{periods_json.min_date[(loop.index-1)|string]}}</p>
-                  <!-- <p class="subtitle">MINIMUM</p> -->
-                </div>
-                <iframe style="border-radius:12px"
-                  src="https://open.spotify.com/embed/track/{{periods_json.song_min_uri[(loop.index-1)|string]}}?utm_source=generator"
-                  width="100%" height="100%" frameBorder="0" allowfullscreen=""
-                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                  loading="eager"></iframe>
-
-              </div>
-
-
-
-            </div>
-          </div>
-
+          <iframe
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/track/{{ period.song_start_uri }}?utm_source=generator"
+            width="100%"
+            height="100%"
+            frameborder="0"
+            allowfullscreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
         </div>
-        {% endfor %}
 
+        <div class="column is-one-quarter">
+          <div class="container date-container">
+            <p class="title date end_date">{{ period.end_date }}</p>
+          </div>
+          <iframe
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/track/{{ period.song_end_uri }}?utm_source=generator"
+            width="100%"
+            height="100%"
+            frameborder="0"
+            allowfullscreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
       </div>
 
-
-
+      <div class="columns is-flex is-justify-content-center is-mobile">
+        <div class="column is-one-quarter">
+          <div class="container date-container">
+            <p class="title date min_date">{{ period.min_date }}</p>
+          </div>
+          <iframe
+            style="border-radius:12px"
+            src="https://open.spotify.com/embed/track/{{ period.song_min_uri }}?utm_source=generator"
+            width="100%"
+            height="100%"
+            frameborder="0"
+            allowfullscreen
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
     </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
 
+{% block extra_scripts %}
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
+<script src="{{ url_for('static', filename='js/mood-charts.js') }}"></script>
+<script>
+  new Flickity('.main-carousel', {
+    cellAlign: 'left',
+    contain: true,
+    selectedAttraction: 0.01,
+    friction: 0.15,
+    draggable: false
+  });
 
-
-    <div class="hero-foot">
-
-
-    </div>
-  </section>
-
-  <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>
-
-
-  <script>
-    var elem = document.querySelector('.main-carousel');
-    var flkty = new Flickity(elem, {
-      // options
-      cellAlign: 'left',
-      contain: true,
-      selectedAttraction: 0.01,
-      friction: 0.15,
-      draggable: false
-    });
-
-    // element argument can be a selector string
-    //   for an individual element
-    var flkty = new Flickity('.main-carousel', {
-
-
-    });
-  </script>
-
-  <script>
-    {% for i in periods_json.start_date.items() %}
-
-    var config = {
-      type: "line",
-      data: {
-        labels: {{ labels[loop.index - 1][0] }},
-    datasets: [
-      {
-        label: "data",
-        data: {{ values[loop.index - 1][0] }},
-      backgroundColor: "rgba(30, 215, 96, 0.2)",
-      borderColor: "rgb(30, 215, 96)",
-      borderWidth: 3,
-      lineTension: 0.2,
-      pointBorderWidth: 0.1,
-      pointBorderColor: 'rgba(0, 0, 0, 0)',
-      pointBackgroundColor: 'rgba(0, 0, 0, 0)'
-            
-
-          }
-    ]
-      },
-
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-        elements: {
-        point: {
-          radius: 6
-        }
-      },
-      scales: {
-        yAxes: [
-          {
-            gridLines: {
-              display: false,
-              drawBorder: false,
-            },
-          },
-        ],
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-                drawBorder: false,
-              },
-            },
-          ],
-        },
-
-    }
-              };
-    var ctx = document.getElementById("lineChart-{{loop.index}}").getContext("2d");
-    var lineChart = new Chart(ctx, config);
-    {% endfor %}
-
-  </script>
-
-
-
-</body>
-{% endautoescape %}
-
-</html>
+  {% for period in periods %}
+  window.renderMoodChart({
+    canvasId: "{{ period.canvas_id }}",
+    labels: {{ period.labels | tojson }},
+    values: {{ period.values | tojson }}
+  });
+  {% endfor %}
+</script>
+{% endblock %}

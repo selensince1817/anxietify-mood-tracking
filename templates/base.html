@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Anxietify{% endblock %}</title>
+    <script src="https://kit.fontawesome.com/f759709dd9.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+    {% block extra_head %}{% endblock %}
+  </head>
+  <body class="has-background-black">
+    <section class="hero is-fullheight has-background-black">
+      <div class="hero-head">
+        <header class="navbar">
+          <div class="container">
+            <div class="navbar-brand">
+              <a class="navbar-item has-text-weight-bold has-text-white" href="/">Anxietify</a>
+              <span class="navbar-burger" data-target="navbarMenuHeroC">
+                <span></span>
+                <span></span>
+                <span></span>
+              </span>
+            </div>
+            <div id="navbarMenuHeroC" class="navbar-menu">
+              <div class="navbar-end">
+                <a class="navbar-item has-text-grey" href="/">Home</a>
+                {% set is_logged_in = logged_in if logged_in is defined else True %}
+                {% if is_logged_in %}
+                <a class="navbar-item has-text-white" href="/sign_out">Sign out</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </header>
+      </div>
+
+      <div class="hero-body">
+        <div class="container">
+          {% block body %}{% endblock %}
+        </div>
+      </div>
+
+      <div class="hero-foot">
+        {% block hero_foot %}{% endblock %}
+      </div>
+    </section>
+
+    {% block extra_scripts %}{% endblock %}
+  </body>
+</html>
